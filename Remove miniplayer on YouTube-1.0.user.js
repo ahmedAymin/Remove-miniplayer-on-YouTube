@@ -12,29 +12,22 @@
     "use strict";
 
     const removeMiniplayer = function () {
-        document.querySelector("ytd-miniplayer yt-icon-button[aria-label='Close player']").click();
+        // Close the miniplayer if it is open
+        const closeButton = document.querySelector("ytd-miniplayer yt-icon-button[aria-label='Close player']");
+        if (closeButton) {
+            closeButton.click();
+        }
+
+        // Hide miniplayer button on the video player
         let miniplayerButton = document.querySelector('.ytp-miniplayer-button.ytp-button');
         if (miniplayerButton) {
             miniplayerButton.style.display = 'none';
         }
     };
 
-    // Callback for mutations on the miniplayer
-    const callback = function (mutationsList, observer) {
-        for (const mutation of mutationsList) {
-            if (mutation.attributeName === 'active') {
-                removeMiniplayer();
-            }
-        }
-    };
-
-    // Observe mutations on the miniplayer
-    const miniplayerObserver = new MutationObserver(callback);
-    const miniplayerElement = document.querySelector("ytd-miniplayer");
-    if (miniplayerElement) {
-        miniplayerObserver.observe(miniplayerElement, { attributes: true });
-    }
-
     // Remove miniplayer on video page load
     removeMiniplayer();
+
+    // Set up an event listener to handle dynamically loaded content
+    document.body.addEventListener('yt-navigate-finish', removeMiniplayer);
 })();
