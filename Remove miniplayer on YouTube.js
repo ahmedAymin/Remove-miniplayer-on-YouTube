@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Remove miniplayer on YouTube
 // @namespace    http://tampermonkey.net/
-// @version      1.9
+// @version      1.10
 // @description  Remove YouTube miniplayer
 // @author       Ahmed Elmasri
 // @match        https://www.youtube.com/*
